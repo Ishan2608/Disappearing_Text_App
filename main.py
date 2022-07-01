@@ -1,37 +1,41 @@
 from tkinter import *
-import time
 
 # -----------------------------------------------------------------------------------------
 # LOGIC
 # -----------------------------------------------------------------------------------------
 
-starting_time = 0
 user_text = ""
-
+user_text = ""
 timer = None
 
 
 def start_calculating(event):
-    global starting_time, timer
-
-    if starting_time == 0:
-        starting_time = time.localtime().tm_sec
+    global timer, user_text
 
     if timer is not None:
         window.after_cancel(timer)
 
-    if event.char:
-        timer = window.after(3000, reset_app)
+    if event.keysym == "BackSpace":
+        user_text = user_text[0: len(user_text) - 1]
 
-    starting_time = time.localtime().tm_sec
+    elif event.char:
+        user_text += event.char
+        timer = window.after(5000, reset_app)
+
     return
 
 
 def reset_app():
-    global starting_time, timer
-    starting_time = 0
+    global timer
     typing_area.delete('1.0', 'end')
     window.after_cancel(timer)
+
+
+def save_text():
+    global user_text
+    with open('writeups.txt', 'a') as f:
+        f.write(f'\n{user_text}')
+        user_text = ""
 
 
 # -----------------------------------------------------------------------------------------
@@ -58,12 +62,12 @@ PARA_FONT2 = (FONT_FAMILY1, 12, FONT_STYLE2)
 HEAD_FONT = (FONT_FAMILY2, FONT_SIZE3, FONT_STYLE1)
 
 heading = "WRITE WITH MAGICAL INK"
-instruction = "If you don't press any key for 3 seconds, the text you have written will disappear"
+instruction = "If you don't press any key for 5 seconds, the text you have written will disappear"
 
 window = Tk()
-window.minsize(width=1030, height=520)
+# window.minsize(width=1030, height=520)
 window.title('Disappearing Text Desktop App')
-window.config(bg=BG)
+window.config(bg=BG, padx=20, pady=10)
 
 heading = Label(text=heading, font=HEAD_FONT, bg=BG, fg=FG, padx=10, pady=10)
 instruction = Label(text=instruction, font=PARA_FONT2,
@@ -72,10 +76,20 @@ typing_area = Text(font=PARA_FONT, bg=BG, fg=FG, width=100, height=15, wrap='w',
                    highlightcolor=BORDER, highlightthickness=4, highlightbackground=BORDER,
                    padx=5, pady=5)
 typing_area.bind('<KeyPress>', start_calculating)
+reset_btn = Button(text='Reset', fg=FG, bg=BG, font=PARA_FONT,
+                   highlightbackground=FG, highlightcolor=FG, highlightthickness=0, border=3,
+                   command=reset_app)
 
-heading.pack()
-instruction.pack()
-typing_area.pack()
+save_btn = Button(text='Save', fg=FG, bg=BG, font=PARA_FONT,
+                   highlightbackground=FG, highlightcolor=FG, highlightthickness=0, border=3,
+                   command=save_text)
+
+heading.grid(row=0, column=0, columnspan=3)
+instruction.grid(row=2, column=0, columnspan=3)
+typing_area.grid(row=3, column=0, columnspan=3)
+reset_btn.grid(row=4, column=0)
+save_btn.grid(row=4, column=2)
+
 
 window.mainloop()
 
