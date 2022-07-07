@@ -33,9 +33,25 @@ def reset_app():
 
 def save_text():
     global user_text
-    with open('writeups.txt', 'a') as f:
-        f.write(f'\n{user_text}')
+    if user_text == "":
+        return
+    try:
+        f = open('writeups.txt', 'r')
+    except FileNotFoundError:
+        f = open('writeups.txt', 'w')
+        f.write(user_text)
         user_text = ""
+        return
+    else:
+        cont = f.read()
+        if cont == "":
+            text_to_write = user_text
+        else:
+            text_to_write = f'\n{user_text}'
+
+        with open('writeups.txt', 'a') as f:
+            f.write(text_to_write)
+            user_text = ""
 
 
 # -----------------------------------------------------------------------------------------
@@ -65,7 +81,6 @@ heading = "WRITE WITH MAGICAL INK"
 instruction = "If you don't press any key for 5 seconds, the text you have written will disappear"
 
 window = Tk()
-# window.minsize(width=1030, height=520)
 window.title('Disappearing Text Desktop App')
 window.config(bg=BG, padx=20, pady=10)
 
@@ -78,11 +93,11 @@ typing_area = Text(font=PARA_FONT, bg=BG, fg=FG, width=100, height=15, wrap='w',
 typing_area.bind('<KeyPress>', start_calculating)
 reset_btn = Button(text='Reset', fg=FG, bg=BG, font=PARA_FONT,
                    highlightbackground=FG, highlightcolor=FG, highlightthickness=0, border=3,
-                   command=reset_app)
+                   command=reset_app, width=50)
 
 save_btn = Button(text='Save', fg=FG, bg=BG, font=PARA_FONT,
                    highlightbackground=FG, highlightcolor=FG, highlightthickness=0, border=3,
-                   command=save_text)
+                   command=save_text, width=50)
 
 heading.grid(row=0, column=0, columnspan=3)
 instruction.grid(row=2, column=0, columnspan=3)
@@ -92,4 +107,3 @@ save_btn.grid(row=4, column=2)
 
 
 window.mainloop()
-
