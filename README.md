@@ -4,3 +4,5 @@ If you don't type anything for 5 seconds, text will disappear. Thus, when you ar
 <div>
   <img src="./disappearing_text.gif" alt="Code Output">
 </div>
+
+<hr>
