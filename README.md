@@ -26,7 +26,7 @@ If you don't type anything for 5 seconds, text will disappear. Thus, when you ar
   Text
 </p>
 
-<h2> Step 3: Timer to Delete text </h2>
+<h2> Step 3: Timer to Delete Text </h2>
 <p>
   Text
 </p>
