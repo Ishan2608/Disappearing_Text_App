@@ -14,7 +14,7 @@ If you don't type anything for 5 seconds, text will disappear. Thus, when you ar
 
 <hr>
 
-<h1> Guide to Build this Project </i> (Work in Progress) </i> </h1>
+<h1> Guide to Build this Project </h1>
 
 <h2> Step 1: UI Setup </h2>
 <p>
