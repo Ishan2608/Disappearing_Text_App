@@ -25,9 +25,10 @@ def start_calculating(event):
 
 
 def reset_app():
-    global timer
+    global timer, user_text
     typing_area.delete('1.0', 'end')
-    window.after_cancel(timer)
+    user_text = ""
+    timer = None
 
 
 def save_text():
