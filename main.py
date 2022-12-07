@@ -29,6 +29,7 @@ def reset_app():
     typing_area.delete('1.0', 'end')
     user_text = ""
     timer = None
+    return
 
 
 def save_text():
