@@ -52,6 +52,8 @@ def save_text():
         with open('writeups.txt', 'a') as f:
             f.write(text_to_write)
             user_text = ""
+    finally:
+        return
 
 
 # -----------------------------------------------------------------------------------------
