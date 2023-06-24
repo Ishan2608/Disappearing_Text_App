@@ -1,5 +1,6 @@
 # Python Desktop Application - Disappearing Text Application
-If you don't type anything for 5 seconds, text will disappear. Thus, when you are done typing, save your text.
+
+With the power of Python and the "tkinter" library, I have developed a sleek desktop application that serves as a text editor with unique features. Users can effortlessly type their thoughts and ideas, and if there is no typing activity for 5 seconds, the text will automatically disappear, allowing for a clean workspace. Additionally, users have the option to save their written text as a text document for future reference or editing. This user-friendly and efficient text editor simplifies the writing process, ensuring a clutter-free environment and convenient document management.
 
 <div>
   <img src="disappearing_text.gif" alt="Code Output">
